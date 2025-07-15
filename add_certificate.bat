@@ -65,6 +65,6 @@ REM :::::::::::::::::::::::::::::::::::::::::
  REM :::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
 
-curl http://mitm.it/cert/cer >> mitmproxy-ca-cert.cer
+curl http://mitm.it/cert/cer > mitmproxy-ca-cert.cer
 certutil -addstore root mitmproxy-ca-cert.cer
 pause

@@ -231,8 +231,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    with ThreadedMitmProxy(Addon, listen_host="0.0.0.0", listen_port=args.port, mode=["local:BlueArchive"], allow_hosts=["nxm-tw-bagl.nexon.com"]) as proxy:
-        logger.info(f"Start proxy server on 0.0.0.0:{args.port}.")
+    with ThreadedMitmProxy(Addon, listen_host="127.0.0.1", listen_port=args.port, mode=["local:BlueArchive,curl"], allow_hosts=["nxm-tw-bagl.nexon.com","mitm.it"]) as proxy:
+        logger.info(f"Start proxy server on 127.0.0.1:{args.port}.")
         logger.info("Please log in to the game. The proxy will shut down automatically after collecting data.")
         proxy.join()
 

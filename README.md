@@ -10,4 +10,5 @@ A tool for intercepting BA request, export to JSON, and import it to [Jusin163](
 ## Credits
 
 BA-Resource-Planner: [Github](https://github.com/JustinL163/BA-Resource-Planner)
+
 Mitmproxy: [Github](https://github.com/mitmproxy/mitmproxy)

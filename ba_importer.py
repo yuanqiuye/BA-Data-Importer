@@ -26,6 +26,13 @@ logging.config.dictConfig(
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ba_data")
 
+BA_HOSTS = [
+    "nxm-or-bagl.nexon.com",
+    "nxm-tw-bagl.nexon.com",
+    "nxm-th-bagl.nexon.com",
+    "nxm-kr-bagl.nexon.com"
+]
+
 
 @dataclass
 class Equipment:
@@ -167,11 +174,12 @@ class Addon:
         shutdown_thread.start()
 
     def response(self, flow: http.HTTPFlow) -> None:
-        if not (
-            flow.request
-            and flow.request.pretty_url
-            == "https://nxm-tw-bagl.nexon.com:5000/api/gateway"
-        ):
+        if not flow.request:
+            return
+        
+        # Check if the request URL matches any of the BA hosts
+        gateway_urls = [f"https://{host}:5000/api/gateway" for host in BA_HOSTS]
+        if flow.request.pretty_url not in gateway_urls:
             return
 
         try:
@@ -231,7 +239,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    with ThreadedMitmProxy(Addon, listen_host="127.0.0.1", listen_port=args.port, mode=["local:BlueArchive,curl"], allow_hosts=["nxm-tw-bagl.nexon.com","mitm.it"]) as proxy:
+    with ThreadedMitmProxy(Addon, listen_host="127.0.0.1", listen_port=args.port, mode=["local:BlueArchive,curl"], allow_hosts=BA_HOSTS + ["mitm.it"]) as proxy:
         logger.info(f"Start proxy server on 127.0.0.1:{args.port}.")
         logger.info("Please log in to the game. The proxy will shut down automatically after collecting data.")
         proxy.join()

@@ -5,6 +5,7 @@
 // @version     1.0.0
 // @author      yuanqiuye
 // @grant       none
+// @run-at document-end
 // ==/UserScript==
 
 (function () {
@@ -196,10 +197,11 @@
     function _asyncIterator(r) { var n, t, o, e = 2; for ("undefined" != typeof Symbol && (t = Symbol.asyncIterator, o = Symbol.iterator); e--;) { if (t && null != (n = r[t])) return n.call(r); if (o && null != (n = r[o])) return new AsyncFromSyncIterator(n.call(r)); t = "@@asyncIterator", o = "@@iterator"; } throw new TypeError("Object is not async iterable"); }
     function AsyncFromSyncIterator(r) { function AsyncFromSyncIteratorContinuation(r) { if (Object(r) !== r) return Promise.reject(new TypeError(r + " is not an object.")); var n = r.done; return Promise.resolve(r.value).then(function (r) { return { value: r, done: n }; }); } return AsyncFromSyncIterator = function (r) { this.s = r, this.n = r.next; }, AsyncFromSyncIterator.prototype = { s: null, n: null, next: function () { return AsyncFromSyncIteratorContinuation(this.n.apply(this.s, arguments)); }, return: function (r) { var n = this.s.return; return void 0 === n ? Promise.resolve({ value: r, done: !0 }) : AsyncFromSyncIteratorContinuation(n.apply(this.s, arguments)); }, throw: function (r) { var n = this.s.return; return void 0 === n ? Promise.reject(r) : AsyncFromSyncIteratorContinuation(n.apply(this.s, arguments)); } }, new AsyncFromSyncIterator(r); }
     window.onload = async function () {
+      console.log("Hello, the BA-Data-Importer is running!");
       var importButton = document.querySelector('button[data-id="saving-importbutton"]');
       var newElement = document.createElement('button');
       newElement.innerHTML = "Import BA";
-      newElement.setAttribute("class", "transfer-modal-button display-string");
+      newElement.setAttribute("class", "transfer-modal-button");
       newElement.setAttribute("style", "left: 115px; top: 70px; background-color: #3399ff;");
       newElement.setAttribute("data-id", "saving-import");
       newElement.addEventListener("click", start_import);
@@ -228,7 +230,7 @@
       var importButton = document.querySelector('button[data-id="button-sort"]');
       var newElement = document.createElement('button');
       newElement.innerHTML = "Get permission";
-      newElement.setAttribute("class", "charEditorButton display-string");
+      newElement.setAttribute("class", "charEditorButton");
       newElement.setAttribute("style", "background-color: #3399ff;");
       newElement.setAttribute("data-id", "get-permission");
       newElement.addEventListener("click", async () => {
